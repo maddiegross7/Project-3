@@ -22,7 +22,6 @@ int DisjointSetByRankWPC::Union(int s1, int s2)
   int p, c;
 
   if (links[s1] != -1 || links[s2] != -1) {
-    Print();
     cerr << "Must call union on a set, and not just an element.\n";
     exit(1);
   }
@@ -74,34 +73,14 @@ void DisjointSetByRankWPC::Print()
 
   printf("\n");
   printf("Node:  ");
-  printf("\n");
-  for (i = 0; i < links.size(); i++) {
-    printf("%3d", i); 
-    if((i+1)%10==0){
-      printf("\n");
-    }
-  } 
+  for (i = 0; i < links.size(); i++) printf("%3d", i);  
   printf("\n");
 
   printf("Links: ");
-  printf("\n");
-  for (i = 0; i < links.size(); i++){
-  printf("%3d", links[i]);
-  if((i+1)%10==0){
-      printf("\n");
-    }
-  }
-   
+  for (i = 0; i < links.size(); i++) printf("%3d", links[i]);  
   printf("\n");
 
   printf("Ranks: ");
-  printf("\n");
-  for (i = 0; i < links.size(); i++) {
-    printf("%3d", ranks[i]); 
-    if((i+1)%10==0){
-      printf("\n");
-    }
-
-    } 
+  for (i = 0; i < links.size(); i++) printf("%3d", ranks[i]);  
   printf("\n\n");
 }

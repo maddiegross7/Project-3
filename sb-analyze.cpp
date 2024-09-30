@@ -28,7 +28,7 @@ class ScoringSet{
     int setName = -1;
     int size = 0;
     int character;
-    pair<int, int> score = make_pair(0,0);
+    pair<int, int> score = make_pair(NULL,NULL);
 };
 
 void usage(const char *s) 
@@ -121,32 +121,30 @@ void Superball::analyzeSuperball(){
         found = true;
         if(goals[i] == 1){
           set.score = make_pair(int(i/c), i%c);
-          //cout << "set: " << set.setName << "score: " << set.score.first << ", " << set.score.second << endl;
         }
         break;
       }
     }
 
-    if(!found){
+    if(!found && board[i] != 42){
       ScoringSet thisSet;
       thisSet.setName = block;
       thisSet.size = 1;
       thisSet.character = board[i];
+      if(goals[i] == 1){
+          thisSet.score = make_pair(int(i/c), i%c);
+        }
       sets.push_back(thisSet);
     }
   }
   cout << "Scoring sets:" << endl;
 
   for(int i = 0; i < sets.size(); i++ ){
-    if(sets[i].size >= mss && (sets[i].score.first != 0 || sets[i].score.second != 0)){
+    if(mss <= sets[i].size  && (sets[i].score.first != NULL || sets[i].score.second != NULL)){
       cout << "  Size: " << sets[i].size << " Char: " << (char)(sets[i].character) <<
         " Scoring Cell: " << sets[i].score.first << "," << sets[i].score.second << endl;
     }
-    //cout << "setName: " << sets[i].setName << " size: " << sets[i].size << endl;
   }
-
-  // ds->Print();
-  
 }
 
 
@@ -160,20 +158,12 @@ main(int argc, char **argv)
   s = new Superball(argc, argv);
 
   // for(i=0; i<s->r*s->c; i++){
-  //   cout << s->colors[s->board[i]] << " " ;
+  //   cout << s->goals[i] << " " ;
   //   if((i+1)%s->c == 0){
   //     cout << endl;
   //   }
   // }
-
-  // for(i=0; i<s->r*s->c; i++){
-  //   cout << s->board[i] << " " ;
-  //   if((i+1)%s->c == 0){
-  //     cout << endl;
-  //   }
-  // }
-
+  
   s->analyzeSuperball();
 
-  cout << endl;
 }
