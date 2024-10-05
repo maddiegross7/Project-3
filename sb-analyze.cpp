@@ -1,3 +1,7 @@
+//Maddie Gross
+//Lab 3
+//finds all of the sets that would result in a score given a specific board
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -23,6 +27,8 @@ class Superball {
     void analyzeSuperball();
 };
 
+//This is the info I wanted to know about the set so that I could 
+//determine if they were good enough to score
 class ScoringSet{
   public:
     int setName = -1;
@@ -93,6 +99,9 @@ Superball::Superball(int argc, char **argv)
 }
 
 void Superball::analyzeSuperball(){
+
+  //creating the sets checking the block to the right and the block below, 
+  //not checking if at the bottom row or on the right side because those would not touch the next one
   for(int i = 0; i < r*c; i++){
     if((i+1)%(c) != 0 && colors[board[i]] == colors[board[i+1]] && colors[board[i]] != 0){
       int current = ds->Find(i);
@@ -112,6 +121,7 @@ void Superball::analyzeSuperball(){
 
   vector<ScoringSet> sets;
 
+  //making the sets based on the sets that I have to get the needed info
   for(int i = 0; i < r*c; i++){
     int block = ds->Find(i);
     bool found = false;
@@ -137,6 +147,8 @@ void Superball::analyzeSuperball(){
       sets.push_back(thisSet);
     }
   }
+
+  //printing out the sets that would result in a score
   cout << "Scoring sets:" << endl;
 
   for(int i = 0; i < sets.size(); i++ ){
